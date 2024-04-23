@@ -13,7 +13,7 @@ import java.util.List;
 public class CSVReader {
     private static final String FILE_PATH = "src/Utils/worldcities.csv";
 
-    public CSVResult readAndSortCSV() {
+    public CSVResult readAndSortCSV(int typeFromMain){
         List<City> cities = new ArrayList<>();
         int regularMergeSortCount = 0;
         int shuffledMergeCount = 0;
@@ -33,18 +33,25 @@ public class CSVReader {
 
                 cities.add(new City(cityData[0], latitude, longitude));
             }
-
-            // Sort with MergeSort
-            MergeSort mergeSort = new MergeSort();
-            regularMergeSortCount = mergeSort.sort(new ArrayList<>(cities));
-            Collections.shuffle(cities);
-            shuffledMergeCount = mergeSort.sort(new ArrayList<>(cities));
-
-            // Sort with QuickSort
-            QuickSort quickSort = new QuickSort();
-            regularQuickSortCount = quickSort.sort(new ArrayList<>(cities));
-            Collections.shuffle(cities);
-            shuffledQuickSort = quickSort.sort(new ArrayList<>(cities));
+        switch (typeFromMain) {
+            case 1:
+                // Sort with MergeSort
+                MergeSort mergeSort = new MergeSort();
+                regularMergeSortCount = mergeSort.sort(cities);
+                break;
+            case 3:
+                // Sort with QuickSort
+                QuickSort quickSort = new QuickSort();
+                regularQuickSortCount = quickSort.sort(cities);
+                break;
+            default:
+                Collections.shuffle(cities);
+                //idk hva dette er og hvorfor det er her
+                // shuffledMergeCount = mergeSort.sort(new ArrayList<>(cities));
+                // Collections.shuffle(cities);
+                // shuffledQuickSort = quickSort.sort(new ArrayList<>(cities));
+                break;
+        }
 
         } catch (IOException | NumberFormatException e) {
             e.printStackTrace();

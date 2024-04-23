@@ -22,16 +22,6 @@ public class CSVResult {
         this.shuffledMergeCount = shuffledMergeCount;
     }
 
-  /*  public CSVResult(List<City> cities, int regularMergeCount, int shuffledMergeCount){
-        this.cities = cities;
-        this.regularMergeCount = regularMergeCount;
-        this.shuffledMergeCount = shuffledMergeCount;
-    }
-    public CSVResult(List<City> cities, int regularQuickSortCount, int shuffledQuickSortCount) {
-        this.cities = cities;
-        this.regularQuickSortCount = regularQuickSortCount;
-        this.shuffledQuickSortCount = shuffledQuickSortCount;
-    }*/
 
     public List<City> getCities() {
         return cities;

@@ -15,6 +15,11 @@ public class MergeSort {
         mergeSort(cities, 0, cities.size() - 1);
         return mergeCount;
     }
+    public int sortForLatLong(List<City> cities) {
+        mergeCount = 0;
+        mergeSortForLatLong(cities, 0, cities.size() - 1);
+        return mergeCount;
+    }
 
     private void mergeSort(List<City> cities, int left, int right) {
         if (left < right) {
@@ -22,6 +27,14 @@ public class MergeSort {
             mergeSort(cities, left, mid);
             mergeSort(cities, mid + 1, right);
             merge(cities, left, mid, right);
+        }
+    }
+    private void mergeSortForLatLong(List<City> cities, int left, int right) {
+        if (left < right) {
+            int mid = (left + right) / 2;
+            mergeSortForLatLong(cities, left, mid);
+            mergeSortForLatLong(cities, mid + 1, right);
+            mergeForLatLong(cities, left, mid, right);
         }
     }
 
@@ -53,5 +66,61 @@ public class MergeSort {
         for (int k = left; k <= right; k++) {
             cities.set(k, temp.get(k - left));
         }
+    }
+    public static void mergeForLatLong(List<City> cities, int left, int mid, int right) {
+        int n1 = mid - left + 1;
+        int n2 = right - mid;
+
+        // Create temporary arrays to store subarrays to be merged
+        City[] L = new City[n1];
+        City[] R = new City[n2];
+
+        // Copy the data to the temporary arrays
+        for (int i = 0; i < n1; ++i) {
+            L[i] = cities.get(left + i);
+        }
+        for (int j = 0; j < n2; ++j) {
+            R[j] = cities.get(mid + 1 + j);
+        }
+
+        // Merge the temporary arrays back into the main array
+        int i = 0, j = 0;
+        int k = left;
+        while (i < n1 && j < n2) {
+            // Compare values based on latitude and longitude
+            if (compareCoordinates(L[i], R[j]) <= 0) {
+                cities.set(k, L[i]);
+                i++;
+            } else {
+                cities.set(k, R[j]);
+                j++;
+            }
+            k++;
+        }
+
+        // Add remaining elements from L if any
+        while (i < n1) {
+            cities.set(k, L[i]);
+            i++;
+            k++;
+        }
+
+        // Add remaining elements from R if any
+        while (j < n2) {
+            cities.set(k, R[j]);
+            j++;
+            k++;
+        }
+    }
+
+    // Comparison method based on latitude and longitude using CoordinateComparator
+    private static int compareCoordinates(City city1, City city2) {
+        // Using CoordinateComparator to compare cities based on latitude and longitude
+        return CoordinateComparator.compareCoordinates(
+                Double.toString(city1.getLatitude()),
+                Double.toString(city1.getLongitude()),
+                Double.toString(city2.getLatitude()),
+                Double.toString(city2.getLongitude())
+        );
     }
 }

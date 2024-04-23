@@ -16,9 +16,16 @@ public class CSVReader {
     public CSVResult readAndSortCSV(int typeFromMain){
         List<City> cities = new ArrayList<>();
         int regularMergeSortCount = 0;
+        int LatLongMergeSortCount = 0;
         int shuffledMergeCount = 0;
         int regularQuickSortCount = 0;
+        int LatLongQuickSortCount = 0;
         int shuffledQuickSort = 0;
+
+        MergeSort mergeSort = new MergeSort();
+        QuickSort quickSort = new QuickSort();
+
+
 
         try (BufferedReader br = new BufferedReader(new FileReader(FILE_PATH))) {
             br.readLine(); // Skip the header line
@@ -33,30 +40,31 @@ public class CSVReader {
 
                 cities.add(new City(cityData[0], latitude, longitude));
             }
-        switch (typeFromMain) {
-            case 1:
-                // Sort with MergeSort
-                MergeSort mergeSort = new MergeSort();
-                regularMergeSortCount = mergeSort.sort(cities);
-                break;
-            case 3:
-                // Sort with QuickSort
-                QuickSort quickSort = new QuickSort();
-                regularQuickSortCount = quickSort.sort(cities);
-                break;
-            default:
-                Collections.shuffle(cities);
+            switch (typeFromMain) {
+                case 1 ->
+                    // Sort with MergeSort
+                        regularMergeSortCount = mergeSort.sort(cities);
+                case 2 ->
+                    //Sort with MergeSortLatLong
+                        LatLongMergeSortCount = mergeSort.sortForLatLong(cities);
+                case 3 ->
+                    // Sort with QuickSort
+                        regularQuickSortCount = quickSort.sort(cities);
+                case 4 ->
+                    // Sort with QuickSortLatLong
+                        LatLongQuickSortCount = quickSort.sort(cities);
+                default -> Collections.shuffle(cities);
+
                 //idk hva dette er og hvorfor det er her
                 // shuffledMergeCount = mergeSort.sort(new ArrayList<>(cities));
                 // Collections.shuffle(cities);
                 // shuffledQuickSort = quickSort.sort(new ArrayList<>(cities));
-                break;
-        }
+            }
 
         } catch (IOException | NumberFormatException e) {
             e.printStackTrace();
         }
 
-        return new CSVResult(cities, regularQuickSortCount, shuffledQuickSort, regularMergeSortCount, shuffledMergeCount);
+        return new CSVResult(cities, regularQuickSortCount, LatLongQuickSortCount, shuffledQuickSort, regularMergeSortCount, LatLongMergeSortCount, shuffledMergeCount);
     }
 }

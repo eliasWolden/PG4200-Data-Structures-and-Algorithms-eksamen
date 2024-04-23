@@ -11,7 +11,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class CSVReader {
-    private static final String FILE_PATH = "/Users/hannaheilertsen/Dropbox/Mac/Documents/HK/2/V2024/AlgDAt/Exam/simplemaps_worldcities_basicv1.77/worldcities.csv";
+    private static final String FILE_PATH = "src/Utils/worldcities.csv";
 
     public CSVResult readAndSortCSV() {
         List<City> cities = new ArrayList<>();

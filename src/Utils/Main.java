@@ -120,7 +120,7 @@ public class Main {
         List<City> cities = new ArrayList<>();
         String line;
         String splitBy = ",";
-        try (BufferedReader br = new BufferedReader(new FileReader("/Users/hannaheilertsen/Dropbox/Mac/Documents/HK/2/V2024/AlgDAt/Exam/simplemaps_worldcities_basicv1.77/worldcities.csv"))) {
+        try (BufferedReader br = new BufferedReader(new FileReader("src/Utils/worldcities.csv"))) {
             br.readLine(); // Skip header line
             while ((line = br.readLine()) != null) {
                 String[] cityData = line.split(splitBy);

@@ -46,25 +46,33 @@ public class CSVReader {
                         regularMergeSortCount = mergeSort.sort(cities);
                 case 2 ->
                     //Sort with MergeSortLatLong
-                        LatLongMergeSortCount = mergeSort.sortForLatLong(cities);
+                        mergeSort.sortForLatLong(cities);
                 case 3 ->
                     // Sort with QuickSort
                         regularQuickSortCount = quickSort.sort(cities);
                 case 4 ->
                     // Sort with QuickSortLatLong
-                        LatLongQuickSortCount = quickSort.sort(cities);
-                default -> Collections.shuffle(cities);
-
-                //idk hva dette er og hvorfor det er her
-                // shuffledMergeCount = mergeSort.sort(new ArrayList<>(cities));
-                // Collections.shuffle(cities);
-                // shuffledQuickSort = quickSort.sort(new ArrayList<>(cities));
+                        quickSort.sort(cities);
+                case 5 -> {
+                    // Sort with MergeSort and shuffle
+                    Collections.shuffle(cities);
+                    shuffledMergeCount = mergeSort.sort(cities);
+                }
+                case 6 -> {
+                    // Sort with QuickSort and shuffle
+                    Collections.shuffle(cities);
+                    shuffledQuickSort = quickSort.sort(cities);
+                }
+                default -> {
+                    // Shuffle the cities list when none of the cases match
+                    Collections.shuffle(cities);
+                }
             }
 
         } catch (IOException | NumberFormatException e) {
             e.printStackTrace();
         }
 
-        return new CSVResult(cities, regularQuickSortCount, LatLongQuickSortCount, shuffledQuickSort, regularMergeSortCount, LatLongMergeSortCount, shuffledMergeCount);
+        return new CSVResult(cities, regularQuickSortCount, shuffledQuickSort, regularMergeSortCount, shuffledMergeCount);
     }
 }

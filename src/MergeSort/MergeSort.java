@@ -16,9 +16,9 @@ public class MergeSort {
         return mergeCount;
     }
     public int sortForLatLong(List<City> cities) {
-        mergeCount = 0;
+        int mergeCounter = 0;
         mergeSortForLatLong(cities, 0, cities.size() - 1);
-        return mergeCount;
+        return mergeCounter;
     }
 
     private void mergeSort(List<City> cities, int left, int right) {

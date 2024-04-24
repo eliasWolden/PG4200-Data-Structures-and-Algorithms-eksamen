@@ -44,7 +44,9 @@ public class Main {
         System.out.println("Performing Merge Sort...");
         System.out.println("Regular merge sort:");
         result.getCities().forEach(city -> System.out.println("City: " + city.getName() + ", Latitude: " + city.getLatitude()));
+        System.out.println("--------------------------------------------------------------------------------------------------------------------------");
         System.out.println("Number of Merge sorts: " + result.getRegularMergeCount());
+        System.out.println("--------------------------------------------------------------------------------------------------------------------------");
 
     }
 
@@ -52,8 +54,11 @@ public class Main {
         CSVReader csvReader = new CSVReader();
         CSVResult result = csvReader.readAndSortCSV(2);
         System.out.println("Sorted cities by Latitude and Longitude:");
-        result.getCities().forEach(System.out::println);
+        result.getCities().forEach(city -> System.out.println("City: " + city.getName() + ", Latitude: " + city.getLatitude() + ", Longitude: " + city.getLongitude()));
+        System.out.println("--------------------------------------------------------------------------------------------------------------------------");
         System.out.println("The List is ordered based on calculation of the distance between the longitudes and latitudes using the Haversine formula.");
+        System.out.println("--------------------------------------------------------------------------------------------------------------------------");
+
     }
 
     private static void performQuickSort() {
@@ -62,31 +67,42 @@ public class Main {
         System.out.println("Performing Quick Sort...");
         System.out.println("Regular Quick sort:");
         result.getCities().forEach(city -> System.out.println("City: " + city.getName() + ", Latitude: " + city.getLatitude()));
+        System.out.println("--------------------------------------------------------------------------------------------------------------------------");
         System.out.println("Number of quick sorts: " + result.getRegularQuickSortCount());
+        System.out.println("--------------------------------------------------------------------------------------------------------------------------");
+
     }
 
     private static void performQuickSortWithLongitudeAndLatitude() {
         CSVReader csvReader = new CSVReader();
         CSVResult result = csvReader.readAndSortCSV(4);
         System.out.println("Sorted cities by Longitude and Latitude:");
-        result.getCities().forEach(System.out::println);
+        result.getCities().forEach(city -> System.out.println("City: " + city.getName() + ", Latitude: " + city.getLatitude() + ", Longitude: " + city.getLongitude()));
+        System.out.println("--------------------------------------------------------------------------------------------------------------------------");
         System.out.println("The List is ordered based on calculation of the distance between the longitudes and latitudes using the Haversine formula.");
+        System.out.println("--------------------------------------------------------------------------------------------------------------------------");
     }
     private static void performRandomizedMergeSort() {
         CSVReader csvReader = new CSVReader();
         CSVResult result = csvReader.readAndSortCSV(5);
         System.out.println("Performing Merge Sort with data randomized...");
+        System.out.println("----------------------------------------------");
         System.out.println("Number of merge sorts when randomized: " + result.getShuffledMergeCount());
         CSVResult result2 = csvReader.readAndSortCSV(1);
+        System.out.println("----------------------------------------------");
         System.out.println("Number of merge sorts: " + result2.getRegularMergeCount());
+        System.out.println("----------------------------------------------");
     }
     private static void performRandomizedQuickSort() {
         CSVReader csvReader = new CSVReader();
         CSVResult result = csvReader.readAndSortCSV(6);
         System.out.println("Performing Quick Sort with data randomized...");
+        System.out.println("----------------------------------------------");
         System.out.println("Number of quick sorts when randomized: " + result.getShuffledQuickSortCount());
+        System.out.println("----------------------------------------------");
         CSVResult result2 = csvReader.readAndSortCSV(3);
         System.out.println("Number of quick sorts: " + result2.getRegularQuickSortCount());
+        System.out.println("----------------------------------------------");
 
     }
 

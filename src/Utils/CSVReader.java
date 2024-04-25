@@ -42,17 +42,16 @@ public class CSVReader {
             }
             switch (typeFromMain) {
                 case 1 ->
-                    // Sort with MergeSort
                         regularMergeSortCount = mergeSort.sort(cities);
                 case 2 ->
                     //Sort with MergeSortLatLong
                         mergeSort.sortForLatLong(cities);
                 case 3 ->
                     // Sort with QuickSort
-                        regularQuickSortCount = quickSort.sort(cities);
+                        regularQuickSortCount = quickSort.sort(cities, false);
                 case 4 ->
                     // Sort with QuickSortLatLong
-                        quickSort.sort(cities);
+                        quickSort.sort(cities, true);
                 case 5 -> {
                     // Sort with MergeSort and shuffle
                     Collections.shuffle(cities);
@@ -61,7 +60,7 @@ public class CSVReader {
                 case 6 -> {
                     // Sort with QuickSort and shuffle
                     Collections.shuffle(cities);
-                    shuffledQuickSort = quickSort.sort(cities);
+                    shuffledQuickSort = quickSort.sort(cities, true);
                 }
                 default -> {
                     // Shuffle the cities list when none of the cases match

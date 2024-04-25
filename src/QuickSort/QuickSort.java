@@ -6,33 +6,27 @@ import MergeSort.CoordinateComparator;
 import Utils.City;
 
 public class QuickSort {
-    // Time Complexity: O(n log n) average case, O(n^2) worst case
-    // Space Complexity: O(log n) to O(n) depending on the implementation
-    // (O(log n) for the recursive stack, O(n) for auxiliary space)
     private int swapCount = 0;
 
-    public int sort(List<City> cities) {
+    public int sort(List<City> cities, boolean compareBoth) {
         swapCount = 0;
-        quickSort(cities, 0, cities.size() - 1);
+        quickSort(cities, 0, cities.size() - 1, compareBoth);
         return swapCount;
     }
 
-    private void quickSort(List<City> cities, int low, int high) {
+    private void quickSort(List<City> cities, int low, int high, boolean compareBoth) {
         if (low < high) {
-            int pi = partition(cities, low, high);
-            quickSort(cities, low, pi - 1);
-            quickSort(cities, pi + 1, high);
+            int pi = partition(cities, low, high, compareBoth);
+            quickSort(cities, low, pi - 1, compareBoth);
+            quickSort(cities, pi + 1, high, compareBoth);
         }
     }
 
-    private int partition(List<City> cities, int low, int high) {
-        // Choosing the pivot as the city at the high index
+    private int partition(List<City> cities, int low, int high, boolean compareBoth) {
         City pivotCity = cities.get(high);
-
         int i = low - 1;
         for (int j = low; j < high; j++) {
-            // Comparing cities using custom compare method
-            if (compare(cities.get(j), pivotCity) <= 0) {
+            if (compare(cities.get(j), pivotCity, compareBoth) <= 0) {
                 i++;
                 swap(cities, i, j);
             }
@@ -41,17 +35,20 @@ public class QuickSort {
         return i + 1;
     }
 
-
-    private int compare(City city1, City city2) {
-        // Using CoordinateComparator to compare cities based on latitude and longitude
-        return CoordinateComparator.compareCoordinates(
-                Double.toString(city1.getLatitude()),
-                Double.toString(city1.getLongitude()),
-                Double.toString(city2.getLatitude()),
-                Double.toString(city2.getLongitude())
-        );
+    private int compare(City city1, City city2, boolean compareBoth) {
+        if (compareBoth) {
+            // Sammenligner både breddegrad og lengdegrad
+            return CoordinateComparator.compareCoordinates(
+                    Double.toString(city1.getLatitude()),
+                    Double.toString(city1.getLongitude()),
+                    Double.toString(city2.getLatitude()),
+                    Double.toString(city2.getLongitude())
+            );
+        } else {
+            // Sammenligner kun breddegrad (Latitude)
+            return Double.compare(city1.getLatitude(), city2.getLatitude());
+        }
     }
-
 
     private void swap(List<City> cities, int i, int j) {
         City temp = cities.get(i);

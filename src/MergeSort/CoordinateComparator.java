@@ -21,7 +21,6 @@ public class CoordinateComparator {
         else
             return 0;
     }
-
     private static double haversine(double lat, double lon) {
         // Radius of the Earth in kilometers
         final double R = 6371.0;
@@ -40,5 +39,4 @@ public class CoordinateComparator {
         double distance = R * c;
         return distance;
     }
-
 }

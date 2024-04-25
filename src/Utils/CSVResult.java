@@ -1,19 +1,15 @@
 package Utils;
-
 import java.util.List;
-
 public class CSVResult {
     private List<City> cities;
-    //private int mergeCount;
-
-    /*---------*/
     private int regularMergeCount;
     private int shuffledMergeCount;
 
     private int regularQuickSortCount;
     private int shuffledQuickSortCount;
 
-    public CSVResult(List<City> cities, int regularQuickSortCount, int shuffledQuickSortCount, int regularMergeCount, int shuffledMergeCount) {
+    public CSVResult(List<City> cities, int regularQuickSortCount,
+                     int shuffledQuickSortCount, int regularMergeCount, int shuffledMergeCount) {
         this.cities = cities;
         //this.mergeCount = mergeCount;
         this.regularQuickSortCount = regularQuickSortCount;

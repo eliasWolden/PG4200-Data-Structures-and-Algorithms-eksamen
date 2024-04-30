@@ -71,11 +71,9 @@ public class MergeSort {
         int n1 = mid - left + 1;
         int n2 = right - mid;
 
-        // Create temporary arrays to store subarrays to be merged
         City[] L = new City[n1];
         City[] R = new City[n2];
 
-        // Copy the data to the temporary arrays
         for (int i = 0; i < n1; ++i) {
             L[i] = cities.get(left + i);
         }
@@ -83,11 +81,9 @@ public class MergeSort {
             R[j] = cities.get(mid + 1 + j);
         }
 
-        // Merge the temporary arrays back into the main array
         int i = 0, j = 0;
         int k = left;
         while (i < n1 && j < n2) {
-            // Compare values based on latitude and longitude
             if (compareCoordinates(L[i], R[j]) <= 0) {
                 cities.set(k, L[i]);
                 i++;
@@ -98,14 +94,12 @@ public class MergeSort {
             k++;
         }
 
-        // Add remaining elements from L if any
         while (i < n1) {
             cities.set(k, L[i]);
             i++;
             k++;
         }
 
-        // Add remaining elements from R if any
         while (j < n2) {
             cities.set(k, R[j]);
             j++;
@@ -113,9 +107,7 @@ public class MergeSort {
         }
     }
 
-    // Comparison method based on latitude and longitude using CoordinateComparator
     private static int compareCoordinates(City city1, City city2) {
-        // Using CoordinateComparator to compare cities based on latitude and longitude
         return CoordinateComparator.compareCoordinates(
                 Double.toString(city1.getLatitude()),
                 Double.toString(city1.getLongitude()),

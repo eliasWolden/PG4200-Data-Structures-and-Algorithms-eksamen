@@ -11,7 +11,6 @@ public class CSVResult {
     public CSVResult(List<City> cities, int regularQuickSortCount,
                      int shuffledQuickSortCount, int regularMergeCount, int shuffledMergeCount) {
         this.cities = cities;
-        //this.mergeCount = mergeCount;
         this.regularQuickSortCount = regularQuickSortCount;
         this.shuffledQuickSortCount = shuffledQuickSortCount;
         this.regularMergeCount = regularMergeCount;

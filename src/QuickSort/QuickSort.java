@@ -37,7 +37,6 @@ public class QuickSort {
 
     private int compare(City city1, City city2, boolean compareBoth) {
         if (compareBoth) {
-            // Sammenligner både breddegrad og lengdegrad
             return CoordinateComparator.compareCoordinates(
                     Double.toString(city1.getLatitude()),
                     Double.toString(city1.getLongitude()),
@@ -45,7 +44,6 @@ public class QuickSort {
                     Double.toString(city2.getLongitude())
             );
         } else {
-            // Sammenligner kun breddegrad (Latitude)
             return Double.compare(city1.getLatitude(), city2.getLatitude());
         }
     }

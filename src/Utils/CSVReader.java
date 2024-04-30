@@ -16,10 +16,8 @@ public class CSVReader {
     public CSVResult readAndSortCSV(int typeFromMain){
         List<City> cities = new ArrayList<>();
         int regularMergeSortCount = 0;
-        int LatLongMergeSortCount = 0;
         int shuffledMergeCount = 0;
         int regularQuickSortCount = 0;
-        int LatLongQuickSortCount = 0;
         int shuffledQuickSort = 0;
 
         MergeSort mergeSort = new MergeSort();
@@ -28,7 +26,7 @@ public class CSVReader {
 
 
         try (BufferedReader br = new BufferedReader(new FileReader(FILE_PATH))) {
-            br.readLine(); // Skip the header line
+            br.readLine();
 
             String line;
             while ((line = br.readLine()) != null) {
@@ -44,26 +42,20 @@ public class CSVReader {
                 case 1 ->
                         regularMergeSortCount = mergeSort.sort(cities);
                 case 2 ->
-                    //Sort with MergeSortLatLong
                         mergeSort.sortForLatLong(cities);
                 case 3 ->
-                    // Sort with QuickSort
                         regularQuickSortCount = quickSort.sort(cities, false);
                 case 4 ->
-                    // Sort with QuickSortLatLong
                         quickSort.sort(cities, true);
                 case 5 -> {
-                    // Sort with MergeSort and shuffle
                     Collections.shuffle(cities);
                     shuffledMergeCount = mergeSort.sort(cities);
                 }
                 case 6 -> {
-                    // Sort with QuickSort and shuffle
                     Collections.shuffle(cities);
                     shuffledQuickSort = quickSort.sort(cities, true);
                 }
                 default -> {
-                    // Shuffle the cities list when none of the cases match
                     Collections.shuffle(cities);
                 }
             }

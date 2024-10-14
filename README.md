@@ -1,0 +1,1 @@
+Karakter: C
